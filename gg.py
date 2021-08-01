@@ -30,7 +30,7 @@ print ('Argument List:', str(sys.argv))
 if len(sys.argv) > 1:
     url = sys.argv[1]
 else:
-    url = "https://readmanganato.com/manga-jz987182"  # it sholudnt have / at the end
+    url = "https://manganato.com/manga-lo989297"  # it sholudnt have / at the end
 
 r = requests.get(url)
 url = r.url # to account for redirections
@@ -50,7 +50,7 @@ print(len(soup.findAll('a')))
 for link in soup.findAll('a'):
 
     if link.has_attr('href'):
-        if str(link['href']).find(url.split("/")[len(url.split("/"))-1]) != -1:
+        if str(link['href']).find(url.split("/")[len(url.split("/"))-1]+"/") != -1:
             # print(link['href'])
             chapters.append(link['href'])
             chaptersnames.append(link.text)
@@ -94,6 +94,7 @@ if True:
                 time.sleep(2*60)
             else:
                 succ=True
+                print("downloading : ",chaptersnames[chapternum])
 
 
         print("r.url ",r.url)
@@ -116,8 +117,8 @@ if True:
                 newsrc.append(os.path.join(path,str(chapternum),str(newnew1)+ex))
                 newnew1=newnew1+1
                 src.append(image['src'])
-        print("src after loop ",src)
-        print("new src after loop",newsrc)
+        # print("src after loop ",src)
+        # print("new src after loop",newsrc)
         for index,imgg in enumerate(src): # create the images
             #print("enterd 4")
             if not os.path.exists(os.path.join(path,str(chapternum))):# 1000teachet/ 0
@@ -143,30 +144,28 @@ if True:
                 #print("enterd 5")
 
                 if str(image['src']).find("mkk") != -1 :
-                    print("new src ",newsrc)
-                    print("new num ",newnum)
+                    # print("new src ",newsrc)
+                    # print("new num ",newnum)
                     image['src'] = newsrc[newnew]
                     newnew = newnew+1
             try:
                 soup.findAll("a", {"class": "navi-change-chapter-btn-next a-h"})[0]['href'] = os.path.join(path,str(chapternum+1),"index.html")
                 soup.findAll("a", {"class": "navi-change-chapter-btn-next a-h"})[1]['href'] = os.path.join(path, str(chapternum + 1), "index.html")
             except Exception as e:
-                print("couldnt find next chapter")
-                print(e)
+                pass
             try:
                 soup.findAll("a", {"class": "navi-change-chapter-btn-prev a-h"})[0]['href'] = os.path.join(path,str(chapternum - 1),"index.html")
                 soup.findAll("a", {"class": "navi-change-chapter-btn-prev a-h"})[1]['href'] = os.path.join(path, str(chapternum - 1), "index.html")
             except Exception as e:
-                print("couldnt find prev chapter")
-                print(e)
+                pass
             try:
                 with open("newcss.txt","r",encoding="utf-8") as new:
                     with open("oldcss.txt", "r", encoding="utf-8") as old:
-                        soup = str(soup).replace(old.read(),new.read())
-                        print("css replaced")
+                        newcss = new.read().replace("tobereplaced",os.path.join(os.getcwd(),"css"))
+                        soup = str(soup).replace(old.read(),newcss)
+                        # print("css replaced")
             except Exception as e:
-                print("couldnt replace css")
-                print(e)
+                pass
             # try:
             #    print("content")
             #    print(soup.find("div",{"style":"text-align: center; max-width: 620px; max-height: 310px; margin: 10px auto; overflow: hidden; display: block;"}))

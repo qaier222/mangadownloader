@@ -1,0 +1,6 @@
+gui.py
+guig.py
+# exclude everything
+manga/*
+# exception to the rule
+!manga/nothing.txt

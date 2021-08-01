@@ -1,0 +1,5 @@
+<link href="https://readmanganato.com/themes/hm/css/c-style.css?v=05272021" rel="stylesheet"/>
+<link href="https://readmanganato.com/themes/hm/css/owl.theme.css" rel="stylesheet"/>
+<link href="https://readmanganato.com/themes/hm/css/owl.carousel.css" rel="stylesheet"/>
+<link href="https://readmanganato.com/themes/hm/css/tooltip.css?v=05272021" rel="stylesheet"/>
+<link href="https://readmanganato.com/themes/hm/css/c-style-search.css?v=05272021" rel="stylesheet"/>

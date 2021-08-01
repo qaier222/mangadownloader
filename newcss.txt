@@ -1,0 +1,6 @@
+<link href="C:\Users\hussain\PycharmProjects\mng\css\c-style.css" rel="stylesheet"/>
+<link href="C:\Users\hussain\PycharmProjects\mng\css\owl.theme.css" rel="stylesheet"/>
+<link href="C:\Users\hussain\PycharmProjects\mng\css\owl.carousel.css" rel="stylesheet"/>
+<link href="C:\Users\hussain\PycharmProjects\mng\css\tooltip.css" rel="stylesheet"/>
+<link href="C:\Users\hussain\PycharmProjects\mng\css\c-style-search.css" rel="stylesheet"/>
+<link href="C:\Users\hussain\PycharmProjects\mng\css\c-style-chapter.css" rel="stylesheet"/>

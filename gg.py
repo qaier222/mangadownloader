@@ -95,6 +95,7 @@ if True:
             else:
                 succ=True
                 print("downloading : ",chaptersnames[chapternum])
+                chaptername = chaptersnames[chapternum];
 
 
         print("r.url ",r.url)
@@ -114,16 +115,16 @@ if True:
             if str(image['src']).find("mkk") != -1 :
                 # print(image['src'])
                 ex = "."+image['src'].split(".")[len(image['src'].split(".")) - 1]
-                newsrc.append(os.path.join(path,str(chapternum),str(newnew1)+ex))
+                newsrc.append(os.path.join(path,chaptername,str(newnew1)+ex))
                 newnew1=newnew1+1
                 src.append(image['src'])
         # print("src after loop ",src)
         # print("new src after loop",newsrc)
         for index,imgg in enumerate(src): # create the images
             #print("enterd 4")
-            if not os.path.exists(os.path.join(path,str(chapternum))):# 1000teachet/ 0
-                os.mkdir(os.path.join(path,str(chapternum))) # getting the chapter from the url os.mkdir(os.path.join(path,str(str(chapter).split('/')[len(str(r.url).split('/'))-1])))
-            with open(os.path.join(path,str(chapternum),str(index))+'.jpg', 'wb') as handle:
+            if not os.path.exists(os.path.join(path,chaptername)):# 1000teachet/ 0
+                os.mkdir(os.path.join(path,chaptername)) # getting the chapter from the url os.mkdir(os.path.join(path,str(str(chapter).split('/')[len(str(r.url).split('/'))-1])))
+            with open(os.path.join(path,chaptername,str(index))+'.jpg', 'wb') as handle: # with open(os.path.join(path,str(chapternum),str(index))+'.jpg', 'wb') as handle:
 
                 q = requests.get(imgg, headers=headers)
 
@@ -149,13 +150,13 @@ if True:
                     image['src'] = newsrc[newnew]
                     newnew = newnew+1
             try:
-                soup.findAll("a", {"class": "navi-change-chapter-btn-next a-h"})[0]['href'] = os.path.join(path,str(chapternum+1),"index.html")
-                soup.findAll("a", {"class": "navi-change-chapter-btn-next a-h"})[1]['href'] = os.path.join(path, str(chapternum + 1), "index.html")
+                soup.findAll("a", {"class": "navi-change-chapter-btn-next a-h"})[0]['href'] = os.path.join(path,chaptersnames[chapternum+1],"index.html")
+                soup.findAll("a", {"class": "navi-change-chapter-btn-next a-h"})[1]['href'] = os.path.join(path, chaptersnames[chapternum+1], "index.html")
             except Exception as e:
                 pass
             try:
-                soup.findAll("a", {"class": "navi-change-chapter-btn-prev a-h"})[0]['href'] = os.path.join(path,str(chapternum - 1),"index.html")
-                soup.findAll("a", {"class": "navi-change-chapter-btn-prev a-h"})[1]['href'] = os.path.join(path, str(chapternum - 1), "index.html")
+                soup.findAll("a", {"class": "navi-change-chapter-btn-prev a-h"})[0]['href'] = os.path.join(path,chaptersnames[chapternum-1],"index.html")
+                soup.findAll("a", {"class": "navi-change-chapter-btn-prev a-h"})[1]['href'] = os.path.join(path,chaptersnames[chapternum-1], "index.html")
             except Exception as e:
                 pass
             try:
@@ -178,7 +179,7 @@ if True:
 
 
             #
-            with open(os.path.join(path,str(chapternum),"index.html"), "w",encoding="utf-8") as file:
+            with open(os.path.join(path,chaptername,"index.html"), "w",encoding="utf-8") as file:
 
                 file.write(str(soup))
     print("finished a chapter loop")

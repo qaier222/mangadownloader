@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7de23365-04ff-4e4d-8dc5-918187fd9358" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gg.py" beforeDir="false" afterPath="$PROJECT_DIR$/gg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manga/nothing.txt" beforeDir="false" afterPath="$PROJECT_DIR$/manga/nothing.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/newcss.txt" beforeDir="false" afterPath="$PROJECT_DIR$/newcss.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup as bs
 import os
 import time
 import sys
+import re
+
 
 headers = {
     'authority': 's61.mkklcdnv6tempv2.com',
@@ -30,19 +32,21 @@ print ('Argument List:', str(sys.argv))
 if len(sys.argv) > 1:
     url = sys.argv[1]
 else:
-    url = "https://manganato.com/manga-lo989297"  # it sholudnt have / at the end
-
+    url = "https://manganato.com/manga-lg988541/"  # it sholudnt have / at the end
+if url[-1] == "/":
+    print("det")
+    url = url.rstrip("/")
 r = requests.get(url)
 url = r.url # to account for redirections
 soup = bs(r.text, "html.parser")
 # print(html.findAll('img'))
 images = soup.findAll('img')
 src = []
-# for image in images:
-#     # print image source
-#     if str(image['src']).find("mkk") != -1 :
-#         print(image['src'])
-#         src.append(image['src'])
+# scripts = soup.findAll("script")
+# for script in scripts:
+#     script.extract()
+
+
 # print (src)
 chapters = []
 chaptersnames = []
@@ -60,11 +64,11 @@ print("chapters names : ",chaptersnames)
 # html = r.text
 
 print(r.status_code)
-print(r.history)
-print(r.url)
-print(r.reason)
-print(r.headers)
-print(r)
+# print(r.history)
+# print(r.url)
+# print(r.reason)
+# print(r.headers)
+# print(r)
 # print(chapters)
 directory = "manga"
 parent_dir = os.getcwd()
@@ -73,17 +77,31 @@ print(manganame)
 path = os.path.join(parent_dir, directory,manganame)
 if not os.path.exists(path):
     os.mkdir(path)
+with open(path+"/poster.jpg","wb") as img:
+    poster = soup.findAll("img") [-2]  ["src"]
+    q = requests.get(poster, headers=headers)
+
+    if not q.ok:
+        print(q.status_code)
+
+    for block in q.iter_content(1024):
+        if not block:
+            break
+
+        img.write(block)
 # print(path) #C:\Users\hussain\PycharmProjects\mng\manga\10000teacher
 print(len(chapters))
 chapters = chapters[::-1] #reversing using list slicing
 chaptersnames = chaptersnames[::-1]
+for index,fix in enumerate(chaptersnames): #remove illegal path names
+    rstr = r"[\/\\\:\*\?\"\<\>\|]"  # '/ \ : * ? " < > |'
+    chaptersnames[index] = re.sub(rstr, "_", chaptersnames[index])
 
 if True:
-    #print("enterd 1")
     for chapternum,chapter in enumerate(chapters):
         succ = False
         #print("enterd 2")
-        if os.path.exists( os.path.join(path,str(chapternum))): #if a already downloaded exist skip to the next one
+        if os.path.exists( os.path.join(path,chaptersnames[chapternum])): #if a already downloaded exist skip to the next one
             continue
         while not succ: #for if the requests are too much
             try:
@@ -122,6 +140,7 @@ if True:
         # print("new src after loop",newsrc)
         for index,imgg in enumerate(src): # create the images
             #print("enterd 4")
+
             if not os.path.exists(os.path.join(path,chaptername)):# 1000teachet/ 0
                 os.mkdir(os.path.join(path,chaptername)) # getting the chapter from the url os.mkdir(os.path.join(path,str(str(chapter).split('/')[len(str(r.url).split('/'))-1])))
             with open(os.path.join(path,chaptername,str(index))+'.jpg', 'wb') as handle: # with open(os.path.join(path,str(chapternum),str(index))+'.jpg', 'wb') as handle:
@@ -182,4 +201,4 @@ if True:
             with open(os.path.join(path,chaptername,"index.html"), "w",encoding="utf-8") as file:
 
                 file.write(str(soup))
-    print("finished a chapter loop")
+    print("finished")

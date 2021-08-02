@@ -1,5 +1,6 @@
 gui.py
 guig.py
+todo.txt
 # exclude everything
 manga/*
 # exception to the rule

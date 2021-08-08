@@ -73,6 +73,9 @@ print(r.status_code)
 directory = "manga"
 parent_dir = os.getcwd()
 manganame = soup.find("h1").text
+
+rstr = r"[\/\\\:\*\?\"\<\>\|]"  # '/ \ : * ? " < > |'
+manganame = re.sub(rstr, "_", manganame)
 print(manganame)
 path = os.path.join(parent_dir, directory,manganame)
 if not os.path.exists(path):
@@ -107,8 +110,9 @@ if True:
             try:
                 r = requests.get(chapter, headers=headers)
             except Exception as e:
-                print("too many tries will sleep fro two minutes")
                 print("err : ",e)
+                print("too many tries will sleep for two minutes")
+
                 time.sleep(2*60)
             else:
                 succ=True

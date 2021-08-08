@@ -1,2 +1,2 @@
 TODO: make the select got to chapters
-TODO: download pst img
+remove https://readmanganato.com/themes/hm/js/custom-chapter.js?v=1.1.4 and implement change event listener

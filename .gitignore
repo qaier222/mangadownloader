@@ -5,3 +5,6 @@ todo.txt
 manga/*
 # exception to the rule
 !manga/nothing.txt
+js/*
+# exception to the rule
+!js/nothing.txt

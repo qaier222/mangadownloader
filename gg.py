@@ -32,7 +32,7 @@ print ('Argument List:', str(sys.argv))
 if len(sys.argv) > 1:
     url = sys.argv[1]
 else:
-    url = "https://manganato.com/manga-lg988541/"  # it sholudnt have / at the end
+    url = "https://manganato.com/manga-fv982930"  # example
 if url[-1] == "/":
     print("det")
     url = url.rstrip("/")
@@ -97,7 +97,7 @@ print(len(chapters))
 chapters = chapters[::-1] #reversing using list slicing
 chaptersnames = chaptersnames[::-1]
 for index,fix in enumerate(chaptersnames): #remove illegal path names
-    rstr = r"[\/\\\:\*\?\"\<\>\|]"  # '/ \ : * ? " < > |'
+    rstr = r"[\/\\\:\*\?\"\<\>\|\.]"  # '/ \ : * ? " < > | .'
     chaptersnames[index] = re.sub(rstr, "_", chaptersnames[index])
 
 if True:
@@ -153,6 +153,7 @@ if True:
 
 
                 if not q.ok:
+                    print("couldnt download image")
                     print(q.status_code)
 
 
@@ -190,6 +191,14 @@ if True:
                         # print("css replaced")
             except Exception as e:
                 pass
+
+
+            try:
+                soup = str(soup).replace("https://readmanganato.com/themes/hm/js/custom-chapter.js?v=1.1.4",os.path.join(os.getcwd(),"js","selectchange.js"))
+            except Exception as e:
+                print("couldnt replace select script")
+                print(e)
+
             # try:
             #    print("content")
             #    print(soup.find("div",{"style":"text-align: center; max-width: 620px; max-height: 310px; margin: 10px auto; overflow: hidden; display: block;"}))

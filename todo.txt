@@ -1,0 +1,4 @@
+todo: put picture
+todo: add check all/ deselect all button
+todo: searching for mao or other short names may not work . fix it later
+pyuic5 -x -o testlist.py testlist.ui

@@ -9,3 +9,5 @@ js/*
 # exception to the rule
 !js/nothing.txt
 *.ui
+test.py
+/testlist.py

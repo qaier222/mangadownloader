@@ -1,4 +1,5 @@
 todo: put picture
 todo: add check all/ deselect all button
 todo: searching for mao or other short names may not work . fix it later
+todo: when manga double clicked load it immedetly
 pyuic5 -x -o testlist.py testlist.ui

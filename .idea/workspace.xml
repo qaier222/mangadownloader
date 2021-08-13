@@ -4,6 +4,7 @@
     <list default="true" id="7de23365-04ff-4e4d-8dc5-918187fd9358" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gg.py" beforeDir="false" afterPath="$PROJECT_DIR$/gg.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui3.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/todo.txt" afterDir="false" />
     </list>
@@ -84,7 +85,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="guid" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="ss" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mng" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -96,7 +97,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/guid.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ss.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -150,10 +151,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.gui3" />
+        <item itemvalue="Python.gg" />
+        <item itemvalue="Python.ss" />
         <item itemvalue="Python.testlist" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.guid" />
-        <item itemvalue="Python.gg" />
       </list>
     </recent_temporary>
   </component>

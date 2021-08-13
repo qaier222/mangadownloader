@@ -11,3 +11,4 @@ js/*
 *.ui
 test.py
 /testlist.py
+/ss.py

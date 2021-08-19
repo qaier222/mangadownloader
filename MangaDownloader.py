@@ -475,7 +475,8 @@ class Ui_MainWindow(object):
             try:
                 # link = str(soup.find("a", string=oga)['href'])
                 def ser(string):
-                    return str(string).find(oga) > -1
+                    return  string == oga
+                    # return str(string).find(oga) > -1
                 link = str(soup.find("a", string= ser )['href'])
                 # self.urledit.setText(link)
                 print("link : ",link)

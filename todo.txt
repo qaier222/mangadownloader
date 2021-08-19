@@ -1,6 +1,5 @@
-todo: put picture
-todo: remove annoying squares . maybe tag.clear() or .extract() .decompose()
 todo: make url and chapters list disabled during loading
+todo: get the athority header from image url
 pyuic5 -x -o gui6.py 6.ui
 
 editing line 242 gg.py

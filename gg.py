@@ -1,9 +1,15 @@
+import math
+import random
+
 import requests
 from bs4 import BeautifulSoup as bs
 import os
 import time
 import sys
 import re
+from PIL import Image
+
+
 
 headers = {
     'authority': 's61.mkklcdnv6tempv2.com',
@@ -23,10 +29,17 @@ headers = {
     'if-modified-since': 'Tue, 16 Mar 2021 03:22:34 GMT',
 }
 
-
+def deletead(style):
+    pattren = "text-align: \w*; max-width: \w*px; max-height: \w*px; margin: \w*px auto; overflow: hidden; display: block;"
+    pattren2 = "max-height: \d*px; text-align: center; width: \d*px; margin: \d*px auto; overflow: hidden; max-width: 100%;"
+    # print("enters deletead : ",style)
+    if style:
+        return re.match(pattren,style) or re.match(pattren2,style)
 # r = requests.get('https://s61.mkklcdnv6tempv2.com/mangakakalot/b2/bv926033/chapter_3/2.jpg', headers=headers)
 
-def download(urlQ="", chapterslistQ=[], pathQ="", update=""):
+def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True,pdf=False):
+    print("download called")
+    print("chapters : ",chapterslistQ)
     print('Number of arguments:', len(sys.argv), 'arguments.')
     print('Argument List:', str(sys.argv))
     if not urlQ:
@@ -85,6 +98,7 @@ def download(urlQ="", chapterslistQ=[], pathQ="", update=""):
         path = os.path.join(pathQ, manganame)
     else:
         path = os.path.join(parent_dir, directory, manganame)
+    path = path.strip()
     if not os.path.exists(path):
         os.mkdir(path)
     with open(path + "/poster.jpg", "wb") as img:
@@ -133,7 +147,7 @@ def download(urlQ="", chapterslistQ=[], pathQ="", update=""):
                 else:
                     succ = True
                     print("downloading : ", chaptersnames[chapternum])
-                    chaptername = chaptersnames[chapternum];
+                    chaptername = chaptersnames[chapternum].strip();
 
             print("r.url ", r.url)
             print(r.status_code)
@@ -157,27 +171,41 @@ def download(urlQ="", chapterslistQ=[], pathQ="", update=""):
                     src.append(image['src'])
             # print("src after loop ",src)
             # print("new src after loop",newsrc)
+            topdf = []
             for index, imgg in enumerate(src):  # create the images
                 # print("enterd 4")
 
+
                 if not os.path.exists(os.path.join(path, chaptername)):  # 1000teachet/ 0
                     os.mkdir(os.path.join(path,
-                                          chaptername))  # getting the chapter from the url os.mkdir(os.path.join(path,str(str(chapter).split('/')[len(str(r.url).split('/'))-1])))
+                                          chaptername.strip()))  # getting the chapter from the url os.mkdir(os.path.join(path,str(str(chapter).split('/')[len(str(r.url).split('/'))-1])))
                 with open(os.path.join(path, chaptername, str(index)) + '.jpg',
                           'wb') as handle:  # with open(os.path.join(path,str(chapternum),str(index))+'.jpg', 'wb') as handle:
+                    while True:
 
-                    q = requests.get(imgg, headers=headers)
+                        q = requests.get(imgg, headers=headers)
+                        if q.ok:
+                            break
 
-                    if not q.ok:
-                        print("couldnt download image")
-                        print(q.status_code)
+                        print("couldnt download image stsus code:",q.status_code)
+                        print("will sleep for 1 minutes")
+                        time.sleep(1*60)
+
+
 
                     for block in q.iter_content(1024):
                         if not block:
                             break
 
                         handle.write(block)
-
+                if(pdf):
+                    if(index == 0):
+                        image1 = Image.open(os.path.join(path, chaptername, str(index)) + '.jpg')
+                        im1 = image1.convert('RGB')
+                    else:
+                        image2 = Image.open(os.path.join(path, chaptername, str(index)) + '.jpg')
+                        im2 = image2.convert('RGB')
+                        topdf.append(im2)
                 newnew = 0
                 for index, image in enumerate(images):  # write new src
                     # print("enterd 5")
@@ -213,14 +241,14 @@ def download(urlQ="", chapterslistQ=[], pathQ="", update=""):
                     with open("newcss.txt", "r", encoding="utf-8") as new:
                         with open("oldcss.txt", "r", encoding="utf-8") as old:
                             newcss = new.read().replace("tobereplaced", os.path.join(os.getcwd(), "css"))
-                            soup = str(soup).replace(old.read(), newcss)
+                            soup = bs(str(soup).replace(old.read(), newcss),"html.parser")
                             # print("css replaced")
                 except Exception as e:
                     pass
 
                 try:
-                    soup = str(soup).replace("https://readmanganato.com/themes/hm/js/custom-chapter.js?v=1.1.4",
-                                             os.path.join(os.getcwd(), "js", "selectchange.js"))
+                    soup = bs(str(soup).replace("https://readmanganato.com/themes/hm/js/custom-chapter.js?v=1.1.4",
+                                             os.path.join(os.getcwd(), "js", "selectchange.js")),"html.parser")
                 except Exception as e:
                     print("couldnt replace select script")
                     print(e)
@@ -235,16 +263,52 @@ def download(urlQ="", chapterslistQ=[], pathQ="", update=""):
                 #     print(e)
 
                 #
+            if (site):
+                print("writing html")
                 with open(os.path.join(path, chaptername, "index.html"), "w", encoding="utf-8") as file:
+                    try:
+
+                        ad = soup.findAll("div",
+                                       style=deletead)
+                        # print("ad len: ",len(ad))
+
+                        for aa in ad:
+                            # print("trying to dec")
+                            aa.decompose()
+                            # print("deced")
+
+                    except Exception as e:
+                        print("couldnt delete ad")
+                        print(e)
+
+
 
                     file.write(str(soup))
-            try:
-                update(i)
-            except  Exception as l:
-                print("couldnt update : ", l)
-            finally:
-                i += 1
+            if(pdf):
+                im1.save(os.path.join(path, chaptername,"chapter.pdf"),save_all=True, append_images=topdf)
+            if progress_callback:
+                try:
+                    progress_callback.emit(math.ceil((i/len(chapterslistQ))*100))
+                except Exception as e:
+                    print(e)
+                # print("update",update)
+            i +=1
         print("finished")
+        return "success"
+
+def test(x):
+    print("gg.test entees")
+    for i in range(10):
+        time.sleep(random.randint(0,5))
+        try:
+            print(x)
+            # print((i+1)*10)
+            # x((i+1)*10)
+            print((i+1)*10)
+            x.emit((i+1)*10)
+        except Exception as e:
+            print(e)
+
 
 
 if __name__ == "__main__":

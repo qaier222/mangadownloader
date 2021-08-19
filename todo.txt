@@ -1,5 +1,6 @@
 todo: put picture
-todo: add check all/ deselect all button
-todo: searching for mao or other short names may not work . fix it later
-todo: when manga double clicked load it immedetly
-pyuic5 -x -o testlist.py testlist.ui
+todo: remove annoying squares . maybe tag.clear() or .extract() .decompose()
+todo: make url and chapters list disabled during loading
+pyuic5 -x -o gui6.py 6.ui
+
+editing line 242 gg.py

@@ -12,3 +12,13 @@ js/*
 test.py
 /testlist.py
 /ss.py
+/qt4.py
+/gui3.exe
+/gui3.spec
+/dist/
+/build/
+/gui6.py
+/MangaDownloader2.py
+/guithread.py
+/02_multithreaded.py
+/threadtesr.py

@@ -113,7 +113,6 @@ def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True
                 break
 
             img.write(block)
-    # print(path) #C:\Users\hussain\PycharmProjects\mng\manga\10000teacher
     print(len(chapters))
     chapters = chapters[::-1]  # reversing using list slicing
     chaptersnames = chaptersnames[::-1]

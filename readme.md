@@ -9,7 +9,7 @@ manga downloader is a tool that allow you to download manga to view offline the 
 
 ## Download
 
-https://img.shields.io/github/downloads/qaier222/mangadownloader/total?color=blue&style=for-the-badge : for Windows
+![alt text](https://img.shields.io/github/downloads/qaier222/mangadownloader/total?color=blue&style=for-the-badge) : for Windows
 
 ## Installation
 

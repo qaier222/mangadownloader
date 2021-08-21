@@ -53,7 +53,7 @@ def deletead(style):
         return re.match(pattren,style) or re.match(pattren2,style)
 # r = requests.get('https://s61.mkklcdnv6tempv2.com/mangakakalot/b2/bv926033/chapter_3/2.jpg', headers=headers)
 
-def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True,pdf=False):
+def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True,pdf=True):
     print("download called")
     print("chapters : ",chapterslistQ)
     print('Number of arguments:', len(sys.argv), 'arguments.')
@@ -63,7 +63,10 @@ def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True
         if len(sys.argv) > 1:
             url = sys.argv[1]
         else:
-            url = "https://manganato.com/manga-fv982930"  # example
+            print("syntzx error: "
+                  "example : gg.py https://manganato.com/manga-fv982930")
+            sys.exit()
+            # url = "https://manganato.com/manga-fv982930"  # example
 
     else:
         url = urlQ

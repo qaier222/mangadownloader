@@ -15,5 +15,5 @@ manga downloader is a tool that allow you to down load manga to view offline the
 
 ## Installation
 
-extract the program into your folder and you are good to go
-it is best not to change the project path after uising it
+extract the program into a folder and you are good to go by opening mangadownloader.exe
+

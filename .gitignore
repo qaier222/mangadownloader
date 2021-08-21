@@ -22,3 +22,6 @@ test.py
 /guithread.py
 /02_multithreaded.py
 /threadtesr.py
+*.spec
+/.idea/
+/__pycache__/

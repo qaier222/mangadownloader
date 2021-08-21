@@ -197,6 +197,9 @@ def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True
                 with open(os.path.join(path, chaptername, str(index)) + '.jpg',
                           'wb') as handle:  # with open(os.path.join(path,str(chapternum),str(index))+'.jpg', 'wb') as handle:
                     while True:
+                        auth = re.search(r"\w*\.\w*\.\w*",imgg).group()
+                        headers["authority"] = auth
+                        # print(f"imgg : {imgg}")
 
                         q = requests.get(imgg, headers=headers)
                         if q.ok:
@@ -302,7 +305,7 @@ def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True
 
                     file.write(str(soup))
             if(pdf):
-                im1.save(os.path.join(path, chaptername,"chapter.pdf"),save_all=True, append_images=topdf)
+                im1.save(os.path.join(path, chaptername,chaptername+".pdf"),save_all=True, append_images=topdf)
             if progress_callback:
                 try:
                     progress_callback.emit(math.ceil((i/len(chapterslistQ))*100))

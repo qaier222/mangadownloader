@@ -1,5 +1,6 @@
 todo: make url and chapters list disabled during loading
 todo: get the athority header from image url
+todo: make dialog to handle exeptions
 pyuic5 -x -o gui6.py 6.ui
-
+pyinstaller -F -w MangaDownloader.py
 editing line 242 gg.py

@@ -1,17 +1,15 @@
 # Manga Downloader
 
 
-manga downloader is a tool that allow you to down load manga to view offline the same way you would online. to enjoy the same expreince
-
-- download the manga in html
-- or in pdf
+manga downloader is a tool that allow you to download manga to view offline the same way you would online. to enjoy the same expreince
 
 
 
 
 
+## Download
 
-
+https://img.shields.io/github/downloads/qaier222/mangadownloader/total?color=blue&style=for-the-badge : for Windows
 
 ## Installation
 

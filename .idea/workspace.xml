@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7de23365-04ff-4e4d-8dc5-918187fd9358" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/data/icon2222.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MangaDownloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/MangaDownloader.py" afterDir="false" />
@@ -46,7 +47,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.cbz">
+  <component name="RunManager" selected="Python.MangaDownloader">
     <configuration name="MangaDownloader" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="mng" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -154,8 +155,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.cbz" />
         <item itemvalue="Python.MangaDownloader" />
+        <item itemvalue="Python.cbz" />
         <item itemvalue="Python.meg" />
         <item itemvalue="Python.test3l" />
         <item itemvalue="Python.lotsofreq" />

@@ -1,6 +1,7 @@
 todo: make url and chapters list disabled during loading
-todo: get the athority header from image url
-todo: make dialog to handle exeptions
+todo: make dialog to handle exeptions -> not to download manga twice (disable btn)
+todo: make logo for chapters tabs
+todo: .cbr/.cbz ???
+todo: try another server when failed
 pyuic5 -x -o gui6.py 6.ui
-pyinstaller -F -w MangaDownloader.py
-editing line 242 gg.py
+pyinstaller -F -w -i "./data/icon2222.ico" MangaDownloader.py

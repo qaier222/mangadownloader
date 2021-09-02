@@ -154,6 +154,7 @@ def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True
             # print("enterd 2")
             if os.path.exists(os.path.join(path, chaptersnames[
                 chapternum])):  # if a already downloaded exist skip to the next one
+                i+=1
                 continue
             while not succ:  # for if the requests are too much
                 try:
@@ -198,21 +199,25 @@ def download(urlQ="", chapterslistQ=[], pathQ="", progress_callback="",site=True
                     os.mkdir(os.path.join(path,
                                           chaptername.strip()))  # getting the chapter from the url os.mkdir(os.path.join(path,str(str(chapter).split('/')[len(str(r.url).split('/'))-1])))
                 with open(os.path.join(path, chaptername, str(index)) + '.jpg',
-                          'wb') as handle:  # with open(os.path.join(path,str(chapternum),str(index))+'.jpg', 'wb') as handle:
+                          'wb') as handle:
+                    print(f"strting downloadin image number {str(index+1)}")
                     while True:
-                        auth = re.search(r"\w*\.\w*\.\w*",imgg).group()
-                        headers["authority"] = auth
-                        # print(f"imgg : {imgg}")
+                        try:
+                            auth = re.search(r"\w*\.\w*\.\w*",imgg).group()
+                            headers["authority"] = auth
+                            # print(f"imgg : {imgg}")
 
-                        q = requests.get(imgg, headers=headers)
-                        if q.ok:
-                            break
-                        q = requests.get(imgg, headers=headers2)
-                        if q.ok:
-                            break
-                        print("couldnt download image stsus code:",q.status_code)
-                        print("will sleep for 1 minutes")
-                        time.sleep(1*60)
+                            q = requests.get(imgg, headers=headers)
+                            if q.ok:
+                                break
+                            q = requests.get(imgg, headers=headers2) ## may delete
+                            if q.ok:
+                                break
+                        except Exception as e:
+                            print(f"exception : {e}")
+                            print("couldnt download image stsus code:",q.status_code)
+                            print("will sleep for 2 minutes")
+                            time.sleep(2*60)
 
 
 

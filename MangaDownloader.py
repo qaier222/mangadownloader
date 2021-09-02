@@ -17,7 +17,7 @@ import traceback
 import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot, QDir, QThread, QObject, pyqtSignal, QRunnable, QThreadPool, QCoreApplication
-from PyQt5.QtWidgets import QFileDialog, QListWidgetItem, QApplication
+from PyQt5.QtWidgets import QFileDialog, QListWidgetItem, QApplication, QMessageBox
 from bs4 import BeautifulSoup as bs
 import time
 import gg
@@ -413,6 +413,7 @@ class Ui_MainWindow(object):
         self.pathedit.setText(file)
 
     def loadchapters(self,link_=False):
+        self.downloadbtn.setEnabled(True)
         if(link_):
             url = link_
         else:
@@ -490,7 +491,7 @@ class Ui_MainWindow(object):
                 print("trace ", e)
                 print(req.url)
                 num = num + 1
-                if num > 20:
+                if num > 99:
                     break
         self.loadchapters(str(link))
 
@@ -525,7 +526,12 @@ class Ui_MainWindow(object):
 
         # gg.download(self.urledit.text(),self.chapterstodownload,self.pathedit.text())
         # if not self.urledit.text() or not
+        if not self.chapterstodownload:
+            QMessageBox.about(self.urledit, "error", "select at least 1 chapter to download")
+            return
         self.oh_no()
+        self.downloadbtn.setEnabled(False)
+
 
     def runTasks(self):
 
@@ -575,15 +581,18 @@ class Ui_MainWindow(object):
         self.worker.finished.connect(self.worker.deleteLater)
         self.thread.finished.connect(self.thread.deleteLater)
         self.worker.progress.connect(self.report_progress)
+        # self.urledit.dropEvent(self.drag)
         self.thread.start()
         # self.threads.append(thread)
         # self.threads[len(self.threads)-1].start()
 
         # self.downloadbtn.setEnabled(False)
         # self.thread.finished.connect(lambda: self.downloadbtn.setEnabled(True))
-
+    def drag(self,e=0):
+        print("*"*50)
     def report_progress(self, n):
         print(n, " n")
+
 
         # m.setValue(math.ceil((n / len(self.chapterstodownload)) * 100))
         # self.progressBar.setProperty("value", n)
@@ -593,7 +602,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MangaDownloader"))
         self.search.setPlaceholderText(_translate("MainWindow", "search"))
-        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(os.getcwd(),"data","icon222.jpg")))
+        MainWindow.setWindowIcon(QtGui.QIcon(os.path.join(os.getcwd(),"data","icon2222.ico")))
         __sortingEnabled = self.mangalist.isSortingEnabled()
         self.mangalist.setSortingEnabled(True)  # to sort
         self.mangalist.setSortingEnabled(__sortingEnabled)
@@ -620,7 +629,7 @@ class Ui_MainWindow(object):
 def loadmangalist():
 
     with open("./data/titles.txt", "r", encoding="utf-8") as file:
-        pass
+
         ui.mangalist.clear()
 
         ui.set_titles(sorted(file.read().split('\n')))
@@ -689,7 +698,7 @@ if __name__ == "__main__":
     loaddefaults()
 
 
-
+    ui.downloadbtn.setEnabled(False)
     MainWindow.show()
     t = threading.Thread(target=loadmangalist)
     t.start()
